@@ -19,15 +19,16 @@ from bgpconfig import *
 native_ns       = "http://cisco.com/ns/yang/Cisco-IOS-XE-native"
 ns_bgp          = 'http://cisco.com/ns/yang/Cisco-IOS-XE-bgp'
 ns_bgp_oper     = 'http://cisco.com/ns/yang/Cisco-IOS-XE-bgp-oper'
-source_node     = '172.23.0.131'
-dest_node       = '172.23.0.137'
+source_node     = '1.1.1.1'
+dest_node       = '2.2.2.2'
+ibgp_as         = '65000'
 netconf_port    = 830
 user_name       = 'administrator'
 pass_word       = 'CiscoDNA!'
 input_file      = "input.txt"
 wait_time       = '30'
-lookup_data     = {"data": {"native": {"router": {"bgp": {"neighbor": {"id": "172.23.0.131", "remote-as": "65000"},
-                    "address-family": {"no-vrf": {"ipv4": {"af-name": "unicast", "ipv4-unicast": {"neighbor":{"id": "172.23.0.131"}}}}}}}}}}
+lookup_data     = {"data": {"native": {"router": {"bgp": {"neighbor": {"id": source_node, "remote-as": ibgp_as},
+                    "address-family": {"no-vrf": {"ipv4": {"af-name": "unicast", "ipv4-unicast": {"neighbor":{"id": source_node}}}}}}}}}}
 #################Start of Code Implemenation#################
 try:
     # Establish connection to both bgp peers. Quit if there are
