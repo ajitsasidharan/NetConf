@@ -81,7 +81,12 @@ def get_bgp_neighbor_state(bgp_state_details,node_ip):
     :return: returns connection state or False if neighbor not found.
     '''
     bgp_neighbor_info=bgp_state_details["rpc-reply"]["data"]['bgp-state-data']['neighbors']['neighbor']
-    for bgp_neighbor in bgp_neighbor_info:
-        if bgp_neighbor['neighbor-id']==node_ip:
-            return bgp_neighbor['connection']['state']
+    if isinstance(bgp_neighbor_info,list):
+        for bgp_neighbor in bgp_neighbor_info:
+            if bgp_neighbor['neighbor-id']==node_ip:
+                return bgp_neighbor['connection']['state']
+    else:
+        if bgp_neighbor_info['neighbor-id']==node_ip:
+            return bgp_neighbor_info['connection']['state']
     return(False)
+
